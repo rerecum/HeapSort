@@ -7,10 +7,12 @@ using namespace std;
 
 class MinHeap {
 public:
-    int* harr; 
-    int capacity; 
-    int heap_size; 
-
+    int* harr;
+    int capacity;
+    int heap_size;
+    ~MinHeap() {
+        delete[]harr;
+    }
     MinHeap(int cap) {
         heap_size = cap;
         capacity = cap;
@@ -75,12 +77,13 @@ public:
     }
 
     void heapSort() {
-        int temp[capacity]; // NIE WIEM JAK TO NAPRAWIC :(
+        int* temp = new int[capacity];
         for (int j = 0; j < capacity; j++) {
             //cout<<extractMin()<<" ";
             temp[j] = extractMin();
             cout << temp[j] << " ";
         }
+        delete[] temp;
     }
 
 };
@@ -94,10 +97,11 @@ int main() {
 
     cout << "Unsorted Array :" << endl;
     obj.printArray();
-
+     
     for (int i = s / 2 - 1; i >= 0; i--) {
         obj.MinHeapify(i);
     }
+
 
     //cout << "Heapified Array :"<<endl;
     //obj.printArray();
